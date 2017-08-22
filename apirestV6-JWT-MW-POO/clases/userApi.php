@@ -52,6 +52,8 @@ public function CargarUno($request,$response,$args)
 	$Apellido=$ArrayDeParametros['Apellido'];
 	$Mail=$ArrayDeParametros['Mail'];
 	$Pass=$ArrayDeParametros['Pass'];
+	//encripto Pass
+	$Pass=md5($pass);
 	$Habilitado=$ArrayDeParametros['Habilitado'];
 	$Usuario=$ArrayDeParametros['Usuario'];
 	//generamos instancia de user
