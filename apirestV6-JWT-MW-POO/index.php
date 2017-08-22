@@ -46,7 +46,7 @@ $app->group('/cd', function () {
 })->add(\MWparaAutentificar::class . ':VerificarUsuario')->add(\MWparaCORS::class . ':HabilitarCORS8080');
 
 
-
+//API REST LV
 $app->group('/user', function () {
  
   $this->get('/', \userApi::class . ':traerTodos')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
@@ -55,7 +55,7 @@ $app->group('/user', function () {
 
  $this->post('/', \userApi::class . ':CargarUno');
 
-  $this->delete('/', \cdApi::class . ':BorrarUno');
+  $this->delete('/', \userApi::class . ':BorrarUno');
 
   $this->put('/', \cdApi::class . ':ModificarUno');
      

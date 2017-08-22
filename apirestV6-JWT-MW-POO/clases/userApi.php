@@ -46,7 +46,7 @@ public function CargarUno($request,$response,$args)
 	$obj= new stdclass();
 	//con el metodo getparsedbody traemos todos los elementos que nos envian en el cuerpo del post
 	$ArrayDeParametros=$request->getParsedBody();
-	var_dump(json_decode($ArrayDeParametros));
+	//var_dump(json_decode($ArrayDeParametros));
 	//asignamos los valores a variables
 	$Nombre=$ArrayDeParametros['Nombre'];
 	$Apellido=$ArrayDeParametros['Apellido'];
@@ -72,6 +72,32 @@ public function CargarUno($request,$response,$args)
 	//devolvemos obj respuesta y 200 de todo ok
 	return $response->WithJson($obj,200);
 
+
+}
+
+Public function BorrarUno($request,$response,$args)
+{
+//Objeto Standar
+$obj= new stdclass();
+//tomo parametro del body que recibo
+$ArrayDeParametros= $request->getParsedBody();
+//genero variable id
+$_id=$ArrayDeParametros['id'];
+//instancia user
+$user= new user();
+$user->Id=$_id;
+//metodo que borra usuario y me devuelve >0 si borro
+$Borrados=$user->BorrarUser();
+$obj->cantidad=$Borrados;
+if($Borrados>0)
+{
+$obj->resultado="Eliminado";
+}
+else
+($obj->resultado="No Elimino Nada");
+//devuelvo respuesta y 200
+$Rta= $response->withJson($obj,200);
+return $Rta;
 
 }
 
