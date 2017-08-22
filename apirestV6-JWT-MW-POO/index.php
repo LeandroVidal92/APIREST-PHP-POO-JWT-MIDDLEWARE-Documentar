@@ -6,6 +6,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require '../composer/vendor/autoload.php';
 require_once '/clases/AccesoDatos.php';
 require_once '/clases/cdApi.php';
+require_once '/clases/userApi.php';
 require_once '/clases/AutentificadorJWT.php';
 require_once '/clases/MWparaCORS.php';
 require_once '/clases/MWparaAutentificar.php';
@@ -31,11 +32,11 @@ $app = new \Slim\App(["settings" => $config]);
 
 /*LLAMADA A METODOS DE INSTANCIA DE UNA CLASE*/
 $app->group('/cd', function () {
- 
+ //Va Bien
   $this->get('/', \cdApi::class . ':traerTodos')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
- 
+ //Va Bien
   $this->get('/{id}', \cdApi::class . ':traerUno')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
-
+//
   $this->post('/', \cdApi::class . ':CargarUno');
 
   $this->delete('/', \cdApi::class . ':BorrarUno');
@@ -45,5 +46,19 @@ $app->group('/cd', function () {
 })->add(\MWparaAutentificar::class . ':VerificarUsuario')->add(\MWparaCORS::class . ':HabilitarCORS8080');
 
 
+
+$app->group('/user', function () {
+ 
+  $this->get('/', \userApi::class . ':traerTodos')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+ 
+  $this->get('/{id}', \userApi::class . ':TraerUno')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+
+ $this->post('/', \cdApi::class . ':CargarUno');
+
+  $this->delete('/', \cdApi::class . ':BorrarUno');
+
+  $this->put('/', \cdApi::class . ':ModificarUno');
+     
+})->add(\MWparaAutentificar::class . ':VerificarUsuario')->add(\MWparaCORS::class . ':HabilitarCORS8080');
 
 $app->run();
