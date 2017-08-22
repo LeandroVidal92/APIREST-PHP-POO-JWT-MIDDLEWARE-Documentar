@@ -9,13 +9,13 @@ class user
 	public $Mail;
 	public $Pass;
 	public $Habilitado;
-
+	public $Usuario;
 
   //ALTA USUARIO
 	 public function InsertarUser()
 	 {
 				$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-				$consulta =$objetoAccesoDato->RetornarConsulta("INSERT into user (Nombre,Apellido,Mail,Pass,Habilitado)values('$this->Nombre','$this->Apellido','$this->Mail','$this->Pass','$this->Habilitado')");
+				$consulta =$objetoAccesoDato->RetornarConsulta("INSERT into usuario (Nombre,Apellido,Mail,Pass,Habilitado,Usuario)values('$this->Nombre','$this->Apellido','$this->Mail','$this->Pass','$this->Habilitado','$this->Usuario')");
 				$consulta->execute();
 				return $objetoAccesoDato->RetornarUltimoIdInsertado();
 				
@@ -55,7 +55,7 @@ class user
   	public static function TraerTodoLosUser()
 	{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta =$objetoAccesoDato->RetornarConsulta("select Id,Nombre,Apellido,Mail,Pass,Habilitado from Usuario ");
+			$consulta =$objetoAccesoDato->RetornarConsulta("select Id,Nombre,Apellido,Mail,Pass,Habilitado,Usuario from Usuario ");
 			$consulta->execute();			
 			return $consulta->fetchAll(PDO::FETCH_CLASS, "user");		
 	}
@@ -63,7 +63,7 @@ class user
 	public static function TraerUnUser($id) 
 	{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta =$objetoAccesoDato->RetornarConsulta("select id,Nombre,Apellido,Mail,Pass,Habilitado from Usuario where id = $id");
+			$consulta =$objetoAccesoDato->RetornarConsulta("select id,Nombre,Apellido,Mail,Pass,Habilitado,Usuario from Usuario where id = $id");
 			$consulta->execute();
 			$unuser= $consulta->fetchObject('user');
 			return $unuser;				

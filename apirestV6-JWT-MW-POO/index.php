@@ -53,7 +53,7 @@ $app->group('/user', function () {
  
   $this->get('/{id}', \userApi::class . ':TraerUno')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
- $this->post('/', \cdApi::class . ':CargarUno');
+ $this->post('/', \userApi::class . ':CargarUno');
 
   $this->delete('/', \cdApi::class . ':BorrarUno');
 
