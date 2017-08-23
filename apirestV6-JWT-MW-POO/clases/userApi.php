@@ -11,6 +11,8 @@ public function TraerUno($request,$response,$args)
 	$id=$args['id'];
 	//utilizamos el metodo de la clase
 	$user=user::TraerUnUser($id);
+	//Desencripto Pass
+	$user->Pass= base64_decode ($user->Pass);
 	//si no encontro informamos que no existio y mandamos un 500 para detectar error
 	if(!$user)
 	{
@@ -35,6 +37,9 @@ public function TraerTodos($request,$response,$args)
 {
 
 	$todosLosUsers= user::TraerTodoLosUser();
+	foreach ($todosLosUsers as  $user) {
+		$user->Pass= base64_decode ($user->Pass);
+	}
 	$Respuesta= $response->withJson($todosLosUsers,200);
 	return $Respuesta;
 
@@ -53,7 +58,8 @@ public function CargarUno($request,$response,$args)
 	$Mail=$ArrayDeParametros['Mail'];
 	$Pass=$ArrayDeParametros['Pass'];
 	//encripto Pass
-	$Pass=md5($pass);
+	//$Pass=md5($pass);
+	$Pass = base64_encode ($Pass);
 	$Habilitado=$ArrayDeParametros['Habilitado'];
 	$Usuario=$ArrayDeParametros['Usuario'];
 	//generamos instancia de user
