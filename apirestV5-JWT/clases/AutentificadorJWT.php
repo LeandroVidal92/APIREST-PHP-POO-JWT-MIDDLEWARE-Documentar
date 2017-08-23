@@ -16,12 +16,14 @@ class AutentificadorJWT
          https://tools.ietf.org/html/rfc7519#section-4.1
          + los que quieras ej="'app'=> "API REST CD 2017" 
         */
+
+
         $payload = array(
         	'iat'=>$ahora,
             'exp' => $ahora + (60),
             'aud' => self::Aud(),
             'data' => $datos,
-            'app'=> "API REST CD 2017"
+            'app'=> "API REST User 2017"
         );
         return JWT::encode($payload, self::$claveSecreta);
     }
