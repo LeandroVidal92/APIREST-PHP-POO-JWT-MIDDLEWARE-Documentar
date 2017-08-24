@@ -53,7 +53,7 @@ class MWparaAutentificar
 				$objDelaRespuesta->excepcion=$e->getMessage();
 				$objDelaRespuesta->esValido=false;     
 			}
-
+				var_dump($objDelaRespuesta->esValido);
 			if($objDelaRespuesta->esValido)
 			{						
 				if($request->isPost())

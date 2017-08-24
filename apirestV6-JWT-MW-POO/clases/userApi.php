@@ -58,7 +58,7 @@ public function CargarUno($request,$response,$args)
 	$Mail=$ArrayDeParametros['Mail'];
 	$Pass=$ArrayDeParametros['Pass'];
 	//encripto Pass
-	//$Pass=md5($pass);
+	//$Pass=md5($pass);`
 	$Pass = base64_encode ($Pass);
 	$Habilitado=$ArrayDeParametros['Habilitado'];
 	$Usuario=$ArrayDeParametros['Usuario'];
@@ -72,6 +72,7 @@ public function CargarUno($request,$response,$args)
 	$user->Habilitado=$Habilitado;
 	$user->Usuario=$Usuario;
 	//utilizamos metodo
+	try{
 	$user->InsertarUser();
 	//nose para que sirve
 	$archivos = $request->getUploadedFiles();
@@ -79,7 +80,11 @@ public function CargarUno($request,$response,$args)
 	$obj->respuesta="Guardo el Usuario";
 	//devolvemos obj respuesta y 200 de todo ok
 	return $response->WithJson($obj,200);
-
+	}
+	catch
+	{
+		return $response->withJson($obj,401);
+	}
 
 }
 
